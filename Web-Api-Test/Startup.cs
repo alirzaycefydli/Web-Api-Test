@@ -63,6 +63,10 @@ namespace Web_Api_Test
             {
                 endpoints.MapControllers();
             });
+
+
+            // Seed data if not exist in the database
+            AppDbInitializer.Seed(app);
         }
     }
 }
