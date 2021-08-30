@@ -47,5 +47,12 @@ namespace Web_Api_Test.Controllers
             var updatedBook=_booksService.UpdateBookByID(id,bookViewModel);
             return Ok(updatedBook);
         }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookByID(int id)
+        {
+            _booksService.DeleteBookById(id);
+            return Ok();
+        }
     }
 }

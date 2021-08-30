@@ -60,6 +60,16 @@ namespace Web_Api_Test.Data.Services
                 _context.SaveChanges();
             }
             return _book;
-        } 
+        }
+
+        public void DeleteBookById(int id)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.Id == id);
+            if (_book != null)
+            {
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
+        }
     }
 }
