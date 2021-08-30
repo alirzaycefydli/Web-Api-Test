@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Api_Test.Data;
+using Web_Api_Test.Data.Services;
 
 namespace Web_Api_Test
 {
@@ -36,6 +37,10 @@ namespace Web_Api_Test
 
             //Configure DB context with SQL database
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+            //Configure Services
+            services.AddTransient<BookService>();
+
 
             services.AddSwaggerGen(c =>
             {
