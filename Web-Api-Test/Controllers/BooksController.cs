@@ -40,5 +40,12 @@ namespace Web_Api_Test.Controllers
             var book= _booksService.GetBookById(id);
             return Ok(book);
         }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult AddBook(int id, [FromBody] BookViewModel bookViewModel)
+        {
+            var updatedBook=_booksService.UpdateBookByID(id,bookViewModel);
+            return Ok(updatedBook);
+        }
     }
 }
