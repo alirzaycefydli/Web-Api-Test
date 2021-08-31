@@ -49,9 +49,22 @@ namespace Web_Api_Test.Data.Services
             return _context.Books.ToList();
         }
 
-        public Book GetBookById(int id)
+        public BookViewModelWithAuthors GetBookById(int id)
         {
-            return _context.Books.FirstOrDefault(n => n.Id == id);
+            var _bookWithAuthors = _context.Books.Where(n => n.Id == id).Select(bookViewModel => new BookViewModelWithAuthors()
+            {
+                Title = bookViewModel.Title,
+                Description = bookViewModel.Description,
+                IsRead = bookViewModel.IsRead,
+                DateRead = bookViewModel.IsRead ? bookViewModel.DateRead.Value : null,
+                Rate = bookViewModel.IsRead ? bookViewModel.Rate.Value : null,
+                Genre = bookViewModel.Genre,
+                CoverUrl = bookViewModel.CoverUrl,
+                PublisherName = bookViewModel.Publisher.Name,
+                AuthorNames = bookViewModel.Book_Authors.Select(n => n.Author.Name).ToList()
+            }).FirstOrDefault();
+            //return _context.Books.FirstOrDefault(n => n.Id == id);
+            return _bookWithAuthors;
         }
 
         public Book UpdateBookByID(int id, BookViewModel bookViewModel)
