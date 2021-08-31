@@ -27,5 +27,12 @@ namespace Web_Api_Test.Controllers
             _publisherService.AddPublisher(publisherViewModel);
             return Ok();
         }
+
+        [HttpPost("get-publisher-books-with-authors/{id}")]
+        public IActionResult GetPublisherData(int id)
+        {
+            var response = _publisherService.GetPublisherData(id);
+            return Ok(response);
+        }
     }
 }
