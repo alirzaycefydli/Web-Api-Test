@@ -40,5 +40,15 @@ namespace Web_Api_Test.Data.Services
 
             return data;
         }
+
+        public void DeletePublisherById(int id)
+        {
+            var publisher = _context.Publishers.FirstOrDefault(n => n.Id == id);
+            if (publisher != null)
+            {
+                _context.Publishers.Remove(publisher);
+                _context.SaveChanges();
+            }
+        }
     }
 }
