@@ -40,6 +40,8 @@ namespace Web_Api_Test
 
             //Configure Services
             services.AddTransient<BookService>();
+            services.AddTransient<PublishersService>();
+            services.AddTransient<AuthorsService>();
 
 
             services.AddSwaggerGen(c =>
@@ -71,7 +73,7 @@ namespace Web_Api_Test
 
 
             // Seed data if not exist in the database
-            AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
         }
     }
 }
