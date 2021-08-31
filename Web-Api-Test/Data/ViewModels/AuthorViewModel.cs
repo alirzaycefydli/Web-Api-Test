@@ -9,4 +9,10 @@ namespace Web_Api_Test.Data.ViewModels
     {
         public string Name { get; set; }
     }
+
+    public class AuthorWithBooksViewModel
+    {
+        public string Name { get; set; }
+        public List<string> BookTitles { get; set; }
+    }
 }

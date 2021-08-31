@@ -26,5 +26,16 @@ namespace Web_Api_Test.Data.Services
             _context.SaveChanges();
 
         }
+
+        public AuthorWithBooksViewModel GetAuthorWithBooks(int authorId)
+        {
+            var author = _context.Authors.Where(n => n.Id == authorId).Select(n => new AuthorWithBooksViewModel()
+            {
+                Name = n.Name,
+                BookTitles = n.Book_Authors.Select(n => n.Book.Title).ToList()
+            }).FirstOrDefault();
+
+            return author;
+        }
     }
 }
