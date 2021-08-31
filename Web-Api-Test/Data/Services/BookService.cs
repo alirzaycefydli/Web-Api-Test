@@ -25,12 +25,23 @@ namespace Web_Api_Test.Data.Services
                 DateRead = bookViewModel.IsRead ? bookViewModel.DateRead.Value : null,
                 Rate = bookViewModel.IsRead ? bookViewModel.Rate.Value : null,
                 Genre = bookViewModel.Genre,
-                Author = bookViewModel.Author,
                 CoverUrl = bookViewModel.CoverUrl,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                PublisherId = bookViewModel.PublisherId
             };
             _context.Books.Add(_book);
             _context.SaveChanges();
+
+            foreach (var id in bookViewModel.AuthorIds)
+            {
+                var _book_author = new Book_Author()
+                {
+                    BookId = _book.Id,
+                    AuthorId = id
+                };
+                _context.Books_Authors.Add(_book_author);
+                _context.SaveChanges();
+            }
         }
 
         public List<Book> GetAllBooks()
@@ -40,13 +51,13 @@ namespace Web_Api_Test.Data.Services
 
         public Book GetBookById(int id)
         {
-           return _context.Books.FirstOrDefault(n => n.Id==id);
+            return _context.Books.FirstOrDefault(n => n.Id == id);
         }
 
-        public Book UpdateBookByID(int id,BookViewModel bookViewModel)
+        public Book UpdateBookByID(int id, BookViewModel bookViewModel)
         {
             var _book = _context.Books.FirstOrDefault(n => n.Id == id);
-            if(_book != null)
+            if (_book != null)
             {
                 _book.Title = bookViewModel.Title;
                 _book.Description = bookViewModel.Description;
@@ -54,7 +65,6 @@ namespace Web_Api_Test.Data.Services
                 _book.DateRead = bookViewModel.IsRead ? bookViewModel.DateRead.Value : null;
                 _book.Rate = bookViewModel.IsRead ? bookViewModel.Rate.Value : null;
                 _book.Genre = bookViewModel.Genre;
-                _book.Author = bookViewModel.Author;
                 _book.CoverUrl = bookViewModel.CoverUrl;
 
                 _context.SaveChanges();

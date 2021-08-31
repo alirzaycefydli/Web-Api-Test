@@ -26,7 +26,6 @@ namespace Web_Api_Test.Data
                         DateRead = DateTime.Now.AddDays(-10),
                         Rate = 4,
                         Genre = "Bigraphy",
-                        Author = "First Author",
                         CoverUrl = "https//..",
                         DateAdded = DateTime.Now
                     },
@@ -36,7 +35,6 @@ namespace Web_Api_Test.Data
                         Description = "Second Book Description",
                         IsRead = false,
                         Genre = "Horror",
-                        Author = "Second Author",
                         CoverUrl = "https//..",
                         DateAdded = DateTime.Now
                     });
